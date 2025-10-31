@@ -14,7 +14,7 @@ function checkGuess() {
     count.textContent = "猜測次數："+countNum;
     const userGuess = Number(guessField.value);  //取得欄位值，並轉為數字
     const guesses = document.querySelector(".guesses");
-
+}
 guesses.textContent += userGuess + " ";  
 
 
@@ -37,4 +37,4 @@ function setGameOver() {
         guessField.disabled = true; //停止輸入功能
         guessSubmit.disabled = true;    //停止按鈕功能
 
-
+}
