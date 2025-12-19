@@ -1,22 +1,74 @@
 <!DOCTYPE html>
-<html lang="zh-Hant-TW">
+<html lang="zh-TW">
 <head>
-      <meta charset="utf-8">
-      <title>標題</title>
-      <script src="guess.js" defer></script>
-</head>   
+    <meta charset="UTF-8">
+    <title>猜數字遊戲</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin-top: 50px;
+        }
+        input {
+            font-size: 18px;
+            padding: 5px;
+            width: 100px;
+        }
+        button {
+            font-size: 18px;
+            padding: 5px 10px;
+            margin-left: 5px;
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 20px;
+            color: #333;
+        }
+    </style>
+</head>
 <body>
-  <div>
-    <h1>猜數字遊戲</h1>
-    <label for="guessField">猜一個數字 (1 到 100):</label>
-    <input type="number" class="guessField" id="guessField" min="1" max="100">
-    <button class="guessSubmit">提交</button>
-    <div class="result"></div>
-    <div class="count"></div>
 
-    <p class="guesses"></p>
+    <h1>🎲 猜數字遊戲</h1>
+    <p>請猜一個 1 到 100 的數字</p>
 
-  </div>
+    <input type="number" id="guessInput" min="1" max="100">
+    <button onclick="checkGuess()">猜！</button>
+    <button onclick="resetGame()">重新開始</button>
+
+    <div id="message"></div>
+    <div id="count"></div>
+
+    <script>
+        let answer = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+
+        function checkGuess() {
+            const guess = Number(document.getElementById("guessInput").value);
+            const message = document.getElementById("message");
+            attempts++;
+
+            if (guess < 1 || guess > 100) {
+                message.textContent = "❗ 請輸入 1 到 100 之間的數字";
+            } else if (guess > answer) {
+                message.textContent = "📉 太大了！";
+            } else if (guess < answer) {
+                message.textContent = "📈 太小了！";
+            } else {
+                message.textContent = `🎉 猜對了！答案是 ${answer}`;
+            }
+
+            document.getElementById("count").textContent =
+                `你已經猜了 ${attempts} 次`;
+        }
+
+        function resetGame() {
+            answer = Math.floor(Math.random() * 100) + 1;
+            attempts = 0;
+            document.getElementById("message").textContent = "";
+            document.getElementById("count").textContent = "";
+            document.getElementById("guessInput").value = "";
+        }
+    </script>
 
 </body>
 </html>
